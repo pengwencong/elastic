@@ -14,16 +14,22 @@
 #
 # Use a descriptive name for your cluster:
 #
-#cluster.name: my-application
+cluster.name: "docker-cluster"
+#候选主节点（初始）不设置会自己选举
+#cluster.initial_master_nodes: ["node-1", "node-2"]
 #
 # ------------------------------------ Node ------------------------------------
 #
 # Use a descriptive name for the node:
-#
-#node.name: node-1
+#节点名
+node.name: "node-2"
+#是否可以当做主节点
+node.master: true
+#是否当做数据节点
+node.data: true
 #
 # Add custom attributes to the node:
-#
+#节点属性
 #node.attr.rack: r1
 #
 # ----------------------------------- Paths ------------------------------------
@@ -40,7 +46,7 @@
 # ----------------------------------- Memory -----------------------------------
 #
 # Lock the memory on startup:
-#
+#内存锁定
 bootstrap.memory_lock: false
 #
 # Make sure that the heap size is set to about half the memory available
@@ -53,8 +59,15 @@ bootstrap.memory_lock: false
 #
 # Set the bind address to a specific IP (IPv4 or IPv6):
 #
+#该节点监听地址，不能填本公网IP除非docker启动时设定为公网IP
 network.host: 0.0.0.0
-cluster.name: "docker-cluster"
+#其他节点与该节点通讯IP：填本节点IP
+network.publish_host: 106.55.178.129
+#该节点接受路由端口
+http.port: 9200
+#与其他节点通讯端口
+transport.tcp.port: 9300
+
 #跨域是否开启与跨域运行域名
 http.cors.enabled: true
 http.cors.allow-origin: "*"
@@ -73,10 +86,10 @@ http.cors.allow-origin: "*"
 #
 #当用docker启动出现exited(7)时需要这个配置
 #运行节点配置与分布式节点发现host配置
-node.name: "node-2"
+#候选主节点列表（初识）
 #discovery.seed_hosts: ["106.55.178.129"]
+#可动态增加
 discovery.seed_providers: file
-cluster.initial_master_nodes: ["node-1"]
 #
 # Bootstrap the cluster using an initial set of master-eligible nodes:
 #
