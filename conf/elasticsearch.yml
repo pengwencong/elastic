@@ -24,7 +24,7 @@ cluster.name: docker-cluster
 #节点名
 node.name: node-2
 #是否可以当做主节点
-node.master: true
+#node.master: true
 #是否当做数据节点
 node.data: true
 #
@@ -89,7 +89,7 @@ http.cors.allow-origin: "*"
 #候选主节点列表（初识）
 #discovery.seed_hosts: ["106.55.178.129"]
 #可动态增加
-discovery.seed_providers: file
+#discovery.seed_providers: file
 #
 # Bootstrap the cluster using an initial set of master-eligible nodes:
 #
